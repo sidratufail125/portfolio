@@ -1,5 +1,6 @@
 import CopyEmailButton from "./components/CopyEmailButton";
 import Globe from "./components/Globe";
+import NavLinks from "./components/NavLinks";
 import Typewriter from "./components/Typewriter";
 
 const EMAIL = "sidra.saqib712@gmail.com";
@@ -21,6 +22,7 @@ const profileLinks = [
 ];
 
 const navLinks = [
+  { href: "#top", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
@@ -251,7 +253,7 @@ function ProjectButton({
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden bg-zinc-950 text-zinc-300">
+    <div className="relative overflow-x-clip bg-zinc-950 text-zinc-300">
       {/* Background: glow blobs + faint grid */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-br from-violet-600/30 via-fuchsia-500/10 to-cyan-500/20 blur-3xl" />
@@ -262,23 +264,9 @@ export default function Home() {
 
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-white/5 bg-zinc-950/60 backdrop-blur-xl">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-mono text-lg font-semibold text-white">
-            sidra<span className="text-violet-400">.dev</span>
-          </a>
-          <ul className="hidden gap-8 text-sm md:flex">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-2">
+        <nav className="mx-auto flex max-w-6xl items-center justify-end gap-8 px-6 py-4">
+          <NavLinks links={navLinks} />
+          <div className="flex items-center gap-2 md:border-l md:border-white/10 md:pl-6">
             {profileLinks.map((link) => (
               <a
                 key={link.label}
