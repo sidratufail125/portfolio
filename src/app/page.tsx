@@ -1,4 +1,5 @@
 import CopyEmailButton from "./components/CopyEmailButton";
+import Globe from "./components/Globe";
 import Typewriter from "./components/Typewriter";
 
 const EMAIL = "sidra.saqib712@gmail.com";
@@ -296,35 +297,40 @@ export default function Home() {
 
       <main id="top" className="relative mx-auto max-w-6xl px-6">
         {/* Hero */}
-        <section className="flex min-h-[calc(100vh-4rem)] flex-col justify-center py-20">
-          <p className="text-xl text-violet-400 sm:text-2xl">Hello, I&apos;m</p>
-          <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
-            Sidra Tufail
-          </h1>
-          <h2 className="mt-4 min-h-[1.25em] text-3xl font-bold sm:text-5xl">
-            <Typewriter words={roles} />
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
-            Creative and detail-oriented Frontend Developer with 2.5+ years of
-            experience building responsive, scalable, and user-friendly web
-            applications. Passionate about creating innovative web solutions,
-            delivering exceptional user experiences, and embracing new
-            challenges.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              className="rounded-lg bg-violet-500 px-6 py-3 font-medium text-white shadow-lg shadow-violet-500/30 transition hover:-translate-y-0.5 hover:bg-violet-400"
-            >
-              Contact Me
-            </a>
-            <a
-              href="/Sidra-Tufail-CV.pdf"
-              download
-              className="rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
-            >
-              Download CV ↓
-            </a>
+        <section className="grid min-h-[calc(100vh-4rem)] items-center gap-12 py-20 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          <div>
+            <p className="text-xl text-violet-400 sm:text-2xl">Hello, I&apos;m</p>
+            <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
+              Sidra Tufail
+            </h1>
+            <h2 className="mt-4 min-h-[1.25em] text-3xl font-bold sm:text-5xl">
+              <Typewriter words={roles} />
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+              Creative and detail-oriented Frontend Developer with 2.5+ years of
+              experience building responsive, scalable, and user-friendly web
+              applications. Passionate about creating innovative web solutions,
+              delivering exceptional user experiences, and embracing new
+              challenges.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                className="rounded-lg bg-violet-500 px-6 py-3 font-medium text-white shadow-lg shadow-violet-500/30 transition hover:-translate-y-0.5 hover:bg-violet-400"
+              >
+                Contact Me
+              </a>
+              <a
+                href="/Sidra-Tufail-CV.pdf"
+                download
+                className="rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+              >
+                Download CV ↓
+              </a>
+            </div>
+          </div>
+          <div className="hidden justify-center lg:flex">
+            <Globe />
           </div>
         </section>
 
