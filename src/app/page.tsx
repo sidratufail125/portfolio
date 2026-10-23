@@ -1,6 +1,9 @@
 import CopyEmailButton from "./components/CopyEmailButton";
+import Typewriter from "./components/Typewriter";
 
 const EMAIL = "sidra.saqib712@gmail.com";
+
+const roles = ["Frontend Developer", "Web Application Developer"];
 
 const coreStack = [
   "React",
@@ -298,8 +301,8 @@ export default function Home() {
           <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
             Sidra Tufail
           </h1>
-          <h2 className="mt-4 bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-3xl font-bold text-transparent sm:text-5xl">
-            Frontend Developer
+          <h2 className="mt-4 min-h-[1.25em] text-3xl font-bold sm:text-5xl">
+            <Typewriter words={roles} />
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
             Creative and detail-oriented Frontend Developer with 2.5+ years of
