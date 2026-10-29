@@ -456,9 +456,9 @@ export default function Home() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
               Creative and detail-oriented Frontend Developer with 2.5+ years of
               experience building responsive, scalable, and user-friendly web
-              applications. Passionate about creating innovative web solutions,
-              delivering exceptional user experiences, and embracing new
-              challenges.
+              applications using React, Next.js, and TypeScript. Focused on
+              creating high-quality interfaces and delivering seamless user
+              experiences.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
@@ -486,7 +486,7 @@ export default function Home() {
           <SectionHeading
             title="About"
             highlight="Me"
-            subtitle="I'm a Frontend Developer passionate about building modern responsive and user-friendly web applications."
+            subtitle="I'm a Frontend Developer passionate about building modern, responsive, and user-friendly web applications."
           />
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
             <div>
@@ -494,13 +494,13 @@ export default function Home() {
               <div className="mt-3 space-y-3 text-[15px] leading-relaxed">
                 <p>
                   My journey began with a Bachelor&apos;s degree in Computer
-                  Science and grew into a passion for creating beautiful
+                  Science and grew into a passion for creating beautiful,
                   functional user experiences. With over{" "}
-                  <span className="text-white">2.5 years of experience</span>
-                  I have worked on developing responsive web applications. I
-                  currently work as an Associate Software Engineer at Expert
-                  System Solution and contribute to GO Turtle as part of a
-                  Germany-based team.
+                  <span className="text-white">2.5 years of experience</span>,
+                  I have developed responsive web applications. I currently
+                  work as an Associate Software Engineer at Expert System
+                  Solution, and I contribute to GO Turtle, a maritime
+                  recruitment platform, as part of a Germany-based team.
                 </p>
                 <p>
                   I specialize in modern web technologies, including{" "}
@@ -517,10 +517,10 @@ export default function Home() {
                 </p>
                 <p>
                   I&apos;m continuously learning and keeping up with the latest
-                  industry trends to build high-quality performant and
+                  industry trends to build high-quality, performant, and
                   maintainable web applications. I&apos;m passionate about
-                  creating seamless user experiences and continuously growing as
-                  a frontend developer.
+                  creating seamless user experiences and growing as a frontend
+                  developer.
                 </p>
               </div>
               <h4 className="mt-5 border-t border-white/10 pt-4 text-sm font-semibold tracking-widest text-violet-400 uppercase">
