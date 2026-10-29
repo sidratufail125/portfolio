@@ -594,14 +594,17 @@ export default function Home() {
                         {job.period}
                       </p>
                     </div>
-                    <p className="mt-1 flex flex-wrap items-center gap-x-2 text-zinc-400">
-                      {job.company}
-                      <span aria-hidden>•</span>
-                      <span className="inline-flex items-center gap-1">
+                    {/* Company and location stack on phones, share a line from sm up */}
+                    <div className="mt-1.5 flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+                      <p className="font-medium text-zinc-300">{job.company}</p>
+                      <span aria-hidden className="hidden text-zinc-600 sm:inline">
+                        •
+                      </span>
+                      <p className="inline-flex items-center gap-1.5 text-sm text-zinc-400">
                         <PinIcon />
                         {job.location}
-                      </span>
-                    </p>
+                      </p>
+                    </div>
                     <p className="mt-3 text-sm leading-relaxed">{job.summary}</p>
                     <ul className="mt-4 flex flex-wrap gap-2">
                       {job.tags.map((tag) => (
@@ -630,7 +633,7 @@ export default function Home() {
                         </p>
                       )}
                     </div>
-                    <p className="mt-1 text-zinc-400">{item.institution}</p>
+                    <p className="mt-1.5 font-medium text-zinc-300">{item.institution}</p>
                     {item.summary && (
                       <p className="mt-3 text-sm leading-relaxed">
                         {item.summary}
