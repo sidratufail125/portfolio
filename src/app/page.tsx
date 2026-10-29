@@ -86,34 +86,32 @@ const experience = [
   },
 ];
 
-// TODO: these levels are placeholders, not from the CV — set your own
-// self-assessed proficiency (0–100) for each skill.
 const skillCards = [
   {
     title: "Frontend Development",
     skills: [
-      { name: "React / Next.js", level: 90 },
-      { name: "JavaScript / TypeScript", level: 85 },
-      { name: "HTML5 / CSS3", level: 95 },
-      { name: "Tailwind CSS", level: 90 },
+      "React / Next.js",
+      "JavaScript / TypeScript",
+      "HTML5 / CSS3",
+      "Tailwind CSS",
     ],
   },
   {
     title: "Libraries & Architecture",
     skills: [
-      { name: "Redux Toolkit", level: 80 },
-      { name: "Material UI / Bootstrap", level: 85 },
-      { name: "REST API Integration", level: 85 },
-      { name: "Nx Monorepo", level: 70 },
+      "Redux Toolkit",
+      "Material UI / Bootstrap",
+      "REST API Integration",
+      "Nx Monorepo",
     ],
   },
   {
     title: "Tools & Platforms",
     skills: [
-      { name: "Git / GitHub", level: 85 },
-      { name: "Figma", level: 75 },
-      { name: "Postman", level: 80 },
-      { name: "Chrome DevTools", level: 85 },
+      "Git / GitHub",
+      "Figma",
+      "Postman",
+      "Chrome DevTools",
     ],
   },
 ];
@@ -121,17 +119,22 @@ const skillCards = [
 const technologies = [
   "HTML5",
   "CSS3",
+  "SCSS",
   "JavaScript",
   "TypeScript",
   "React",
   "Next.js",
+  "React Router",
   "Redux Toolkit",
   "Tailwind CSS",
   "Bootstrap",
   "Material UI",
+  "shadcn/ui",
   "REST APIs",
   "Axios",
+  "FullCalendar",
   "Nx Monorepo",
+  "Vite",
   "Git",
   "GitHub",
   "VS Code",
@@ -292,6 +295,9 @@ const languages = ["English", "Urdu"];
 
 const card =
   "rounded-xl border border-violet-500/20 bg-[#0f1424]/90 p-6 shadow-[0_0_30px_-6px_rgba(168,85,247,0.45)]";
+
+const skillChip =
+  "cursor-default whitespace-nowrap rounded-full border border-violet-400/30 px-4 py-1.5 text-sm text-violet-300 transition hover:border-pink-400/60 hover:text-pink-300";
 
 const tagPill =
   "rounded-full border border-violet-400/30 px-2.5 py-0.5 text-xs font-semibold text-pink-300";
@@ -655,32 +661,16 @@ export default function Home() {
             highlight="Technologies"
             subtitle="Here are the technologies and tools I work with to bring ideas to life"
           />
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 lg:grid-cols-3">
             {skillCards.map((group) => (
               <div key={group.title} className={card}>
                 <h3 className="text-center text-xl font-bold text-white">
                   {group.title}
                 </h3>
-                <ul className="mt-5 space-y-4">
+                <ul className="mt-5 flex flex-wrap justify-center gap-2.5">
                   {group.skills.map((skill) => (
-                    <li key={skill.name}>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-zinc-200">{skill.name}</span>
-                        <span className="text-violet-300">{skill.level}%</span>
-                      </div>
-                      <div
-                        role="progressbar"
-                        aria-label={skill.name}
-                        aria-valuenow={skill.level}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        className="mt-2 h-2 overflow-hidden rounded-full bg-white/10"
-                      >
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-violet-500 to-blue-500"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
+                    <li key={skill} className={skillChip}>
+                      {skill}
                     </li>
                   ))}
                 </ul>
@@ -692,10 +682,7 @@ export default function Home() {
           </h3>
           <ul className="mx-auto mt-5 flex max-w-5xl flex-wrap justify-center gap-2.5">
             {technologies.map((tech) => (
-              <li
-                key={tech}
-                className="cursor-default rounded-full border border-violet-400/30 px-4 py-1.5 text-sm text-violet-300 transition hover:border-pink-400/60 hover:text-pink-300"
-              >
+              <li key={tech} className={skillChip}>
                 {tech}
               </li>
             ))}
