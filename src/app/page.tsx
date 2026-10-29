@@ -150,9 +150,16 @@ type Project = {
   icon: React.ReactNode;
   // Optional screenshot, e.g. "/projects/go-turtle.png" in public/projects/
   image?: string;
+  // Defaults to "<title> screenshot"
+  imageAlt?: string;
   liveUrl?: string;
   repoUrl?: string;
   privateRepo?: boolean;
+  // Team project in someone else's GitHub account: shows a contributor note
+  // and a "View on GitHub" button linking to the original repo
+  repoOwner?: string;
+  // Further repos for the same project, listed under the buttons; no url = private
+  extraRepos?: { label: string; url?: string }[];
 };
 
 // TODO: set liveUrl / repoUrl for each project, and add a screenshot to
@@ -160,10 +167,10 @@ type Project = {
 const projects: Project[] = [
   {
     title: "GO Turtle",
-    tag: "Germany-based Project",
+    tag: "Maritime Recruitment Platform",
     description:
-      "An international web platform where I build dynamic, reusable UI components like tables, modals, and filters, and manage application state.",
-    stack: ["React", "TypeScript", "Redux Toolkit", "Material UI", "REST APIs"],
+      "A Germany-based maritime recruitment platform connecting seafarers with vetted shipping companies. I build dynamic, reusable UI components like tables, modals, and filters, and manage application state.",
+    stack: ["React 19", "JavaScript", "Nx", "Vite 6", "React Router 7", "SCSS", "Material UI"],
     accent: "from-emerald-500/40 via-teal-600/25 to-cyan-700/30",
     icon: (
       <>
@@ -171,26 +178,36 @@ const projects: Project[] = [
         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </>
     ),
+    image: "/projects/go-turtle.png",
     liveUrl: "https://www.go-turtle.com/",
     privateRepo: true,
   },
   {
     title: "Yourself Pilates",
-    tag: "Fitness Website",
+    tag: "Pilates Coworking Studio",
     description:
-      "A modern, responsive fitness website with a clean and engaging UI, built mobile-first with a focus on performance.",
-    stack: ["Next.js", "Tailwind CSS"],
+      "A Pilates coworking studio in Portugal where instructors book equipment and studio time and clients buy class packs. Built with a clean, responsive, mobile-first UI and a focus on performance.",
+    stack: ["Next.js 16", "React 19", "JavaScript", "Tailwind CSS 4", "shadcn/ui", "Axios"],
+    image: "/projects/yourself-pilates.png",
     liveUrl: "https://www.yourselfpilates.pt/home",
+    // github.com/SyedKamranGH/yourselfpilates is private — set repoUrl if it goes public
+    privateRepo: true,
+    repoOwner: "Kamran",
     accent: "from-pink-500/40 via-rose-600/25 to-fuchsia-700/30",
     icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
   },
   {
-    title: "Fisioactif Gym",
-    tag: "Web Application",
+    title: "Fisioactif",
+    tag: "Physiotherapy & Wellness Clinic",
     description:
-      "A responsive gym management app for member registration, subscription plans, and class scheduling, powered by REST APIs.",
-    stack: ["React", "JavaScript", "CSS", "REST APIs"],
+      "A physiotherapy and wellness clinic platform where clients explore services like rehabilitation, massage, and psychology, book consultations, and subscribe to session packs. Includes a React frontend and a Next.js gym app with an interactive calendar, authentication, and multilingual content.",
+    stack: ["Next.js 15", "React", "JavaScript", "Tailwind CSS", "FullCalendar", "NextAuth"],
+    image: "/projects/fisioactif.png",
     liveUrl: "https://fisioactif.netlify.app/",
+    repoUrl: "https://github.com/SyedKamranGH/fisioactif-gym",
+    repoOwner: "Kamran",
+    // github.com/SyedKamranGH/fisioactif-frontend is private — set its url if it goes public
+    extraRepos: [{ label: "Frontend repo" }],
     accent: "from-amber-500/40 via-orange-600/25 to-red-700/30",
     icon: (
       <>
@@ -205,6 +222,9 @@ const projects: Project[] = [
     description:
       "A comprehensive salon management web app for bookings, staff scheduling, services, and customer records.",
     stack: ["HTML", "CSS", "JavaScript"],
+    // Stock photo (not a screenshot): Greg Trowman on Unsplash, Unsplash License
+    image: "/projects/salon-management.jpg",
+    imageAlt: "Modern salon interior with round mirrors and styling chairs",
     accent: "from-violet-500/40 via-purple-600/25 to-indigo-700/30",
     icon: (
       <>
@@ -335,17 +355,19 @@ function ProjectButton({
   href,
   label,
   disabledLabel,
+  disabledTitle = "Link coming soon",
   primary,
   icon,
 }: {
   href?: string;
   label: string;
   disabledLabel: string;
+  disabledTitle?: string;
   primary?: boolean;
   icon: React.ReactNode;
 }) {
   const base =
-    "inline-flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition";
+    "inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition";
   const style = primary
     ? "bg-gradient-to-r from-violet-600 to-pink-500 text-white"
     : "bg-white text-violet-600";
@@ -353,7 +375,7 @@ function ProjectButton({
     return (
       <span
         aria-disabled
-        title="Link coming soon"
+        title={disabledTitle}
         className={`${base} ${style} cursor-not-allowed opacity-40`}
       >
         {icon}
@@ -697,7 +719,7 @@ export default function Home() {
                   {project.image ? (
                     <Image
                       src={project.image}
-                      alt={`${project.title} screenshot`}
+                      alt={project.imageAlt ?? `${project.title} screenshot`}
                       fill
                       sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
@@ -723,6 +745,14 @@ export default function Home() {
                   <h3 className="text-lg font-bold text-white">
                     {project.title}
                   </h3>
+                  {project.repoOwner && (
+                    <p className="mt-1 flex items-center gap-1.5 text-xs text-violet-300">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                      Team project · I contributed · Repo by {project.repoOwner}
+                    </p>
+                  )}
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
                     {project.description}
                   </p>
@@ -733,21 +763,55 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-4 flex gap-2.5">
+                  {/* Stacked in the narrow 4-column layout so longer labels fit */}
+                  <div className="mt-4 flex gap-2.5 xl:flex-col">
                     <ProjectButton
                       href={project.liveUrl}
                       label="Live Demo"
                       disabledLabel="Live Demo"
+                      disabledTitle="No live demo available"
                       primary
                       icon={<ExternalIcon />}
                     />
                     <ProjectButton
                       href={project.repoUrl}
-                      label="Code"
-                      disabledLabel={project.privateRepo ? "Private" : "Code"}
+                      label={project.repoOwner ? "View on GitHub" : "Code"}
+                      disabledLabel={
+                        project.privateRepo
+                          ? project.repoOwner ? "Private repo" : "Private"
+                          : "Code"
+                      }
+                      disabledTitle={project.privateRepo ? "This repository is private" : undefined}
                       icon={<ProfileIcon label="GitHub" />}
                     />
                   </div>
+                  {project.extraRepos && (
+                    <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                      {project.extraRepos.map((repo) => (
+                        <li key={repo.label}>
+                          {repo.url ? (
+                            <a
+                              href={repo.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-violet-300 transition hover:text-pink-300"
+                            >
+                              <ProfileIcon label="GitHub" />
+                              {repo.label}
+                            </a>
+                          ) : (
+                            <span title="This repository is private" className="inline-flex items-center gap-1.5 text-zinc-500">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5" aria-hidden>
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                              </svg>
+                              {repo.label}: private
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </article>
             ))}
